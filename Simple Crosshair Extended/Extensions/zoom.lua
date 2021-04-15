@@ -10,6 +10,12 @@ function FPCameraPlayerBase:_update_stance(time, deltaTime)
     SCrosshair.Ext.HideOnFinished = nil
   end
 
+  local state = managers.player:current_state()
+  if state and state == "bipod" then
+    Show()
+    return
+  end
+
   local fovData = self._fov
   local transData = fovData.transition
 

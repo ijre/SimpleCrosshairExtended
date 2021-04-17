@@ -1,16 +1,33 @@
 CloneClass(HUDHitConfirm)
+local Ext = HUDHitConfirm.Ext or { Panels = { } }
 
-HUDHitConfirm.PanelNames =
-{
-  "_left",
-  "_right",
-  "_above",
-  "_below",
-  "_above_left",
-  "_above_right",
-  "_below_left",
-  "_below_right"
-}
+function HUDHitConfirm:tick()
+  if SC.Ext.NeedRefresh then
+    self.Ext:ForceRefresh()
+
+    SC.Ext.NeedRefresh = false
+  end
+
+  if managers.player:is_current_weapon_of_category("bow") then
+    self._main:set_center(self._offset:center())
+    managers.hud._hud_hit_confirm:update()
+  else
+    self._main:set_center(self._hud_panel:center())
+    managers.hud._hud_hit_confirm:update()
+  end
+end
+
+function Ext:ShouldShow()
+  return SC.Ext.Settings.Enabled and SC.Ext.Settings.Visible
+end
+
+function Ext:ForceRefresh()
+  for _, panel in pairs(self.Panels) do
+    panel:set_visible(self:ShouldShow())
+  end
+end
+
+HUDHitConfirm.Ext = Ext
 
 function HUDHitConfirm:update()
   self._left:set_center(self._main:center())
@@ -37,28 +54,6 @@ function HUDHitConfirm:update()
 
   self._below_right:set_center(self._right:center())
   self._below_right:set_top(self._main:bottom())
-end
-
-function HUDHitConfirm:tick(t, dt)
-  if SC.NeedRefresh then
-    self:ForceRefresh()
-
-    SC.NeedRefresh = false
-  end
-
-  if managers.player:is_current_weapon_of_category("bow") then
-    self._main:set_center(self._offset:center())
-    managers.hud._hud_hit_confirm:update()
-  else
-    self._main:set_center(self._hud_panel:center())
-    managers.hud._hud_hit_confirm:update()
-  end
-end
-
-function HUDHitConfirm:ForceRefresh()
-  for _, name in pairs(self.PanelNames) do
-    self[name]:set_visible(SC.Ext:ShouldShow())
-  end
 end
 
 Hooks:PostHook( HUDHitConfirm, "init", "Crosshair_define", function(self)
@@ -168,6 +163,18 @@ Hooks:PostHook( HUDHitConfirm, "init", "Crosshair_define", function(self)
   })
   self._below_right:set_center(self._right:center())
   self._below_right:set_top(self._main:bottom())
+
+  self.Ext.Panels =
+  {
+    self._left,
+    self._right,
+    self._above,
+    self._below,
+    self._above_left,
+    self._above_right,
+    self._below_left,
+    self._below_right
+  }
 
   managers.hud:add_updator("CrosshairUpdater", callback(self, self, "tick"))
 end)

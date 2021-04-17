@@ -1,2 +1,2 @@
-SCrosshair.Enabled = not SCrosshair.Enabled
-SCrosshair.NeedRefresh = true
+SC.Enabled = not SC.Enabled
+SC.NeedRefresh = true

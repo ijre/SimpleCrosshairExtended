@@ -4,10 +4,10 @@ function FPCameraPlayerBase:_update_stance(time, deltaTime)
   origUpdateStance(self, time, deltaTime)
 
   local function Show()
-    SCrosshair.Visible = not SCrosshair.Ext.HideOnFinished
-    SCrosshair.NeedRefresh = true
+    SC.Visible = not SC.Ext.HideOnFinished
+    SC.NeedRefresh = true
 
-    SCrosshair.Ext.HideOnFinished = nil
+    SC.Ext.HideOnFinished = nil
   end
 
   local state = managers.player:current_state()
@@ -21,11 +21,11 @@ function FPCameraPlayerBase:_update_stance(time, deltaTime)
 
   if transData then
     if fovData.fov > transData.end_fov then
-      SCrosshair.Ext.HideOnFinished = true
+      SC.Ext.HideOnFinished = true
     elseif fovData.fov < transData.end_fov then
       Show()
     end
-  elseif SCrosshair.Ext.HideOnFinished ~= nil then
+  elseif SC.Ext.HideOnFinished ~= nil then
     Show()
   end
 end

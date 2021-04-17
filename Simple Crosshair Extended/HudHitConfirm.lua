@@ -40,10 +40,10 @@ function HUDHitConfirm:update()
 end
 
 function HUDHitConfirm:tick(t, dt)
-  if SCrosshair.NeedRefresh then
+  if SC.NeedRefresh then
     self:ForceRefresh()
 
-    SCrosshair.NeedRefresh = false
+    SC.NeedRefresh = false
   end
 
   if managers.player:is_current_weapon_of_category("bow") then
@@ -57,7 +57,7 @@ end
 
 function HUDHitConfirm:ForceRefresh()
   for _, name in pairs(self.PanelNames) do
-    self[name]:set_visible(SCrosshair.Ext:ShouldShow())
+    self[name]:set_visible(SC.Ext:ShouldShow())
   end
 end
 

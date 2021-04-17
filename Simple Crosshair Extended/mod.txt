@@ -1,7 +1,7 @@
 {
   "name": "Simple Crosshair Extended",
   "description": "Adds a simple, toggleable crosshair which disables when taking aim, and even offsets itself when you use a bow",
-  "author": "hugojmaia, extensions by ijre",
+  "author": "hugojmaia, extended by ijre",
   "hooks":
   [
     {
@@ -16,7 +16,7 @@
   "keybinds":
   [
     {
-      "keybind_id":  "SCrosshair_Toggle",
+      "keybind_id":  "SC-E_Toggle",
       "name":        "Toggle Crosshair",
       "script_path": "Extensions/toggle.lua",
       "run_in_game": true
@@ -25,10 +25,10 @@
   "updates":
   [
     {
-      "identifier":  "SCrosshair",
+      "identifier":  "SC-E",
       "host":
       {
-        "meta": "https://github.com/ijre/SimpleCrosshair-Extended/releases/download/SCrosshair/meta.json"
+        "meta": "https://github.com/ijre/SimpleCrosshair-Extended/releases/download/SC-E/meta.json"
       }
     }
   ]

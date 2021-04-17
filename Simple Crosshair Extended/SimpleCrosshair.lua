@@ -1,20 +1,25 @@
-SC = SC or
-{
-  Ext = { },
-  Enabled = true,
-  Visible = true
-}
-
 local base = ModPath
 -- local base = ModPath .. "Simple Crosshair Extended/"
-SC.Paths =
+
+SC = SC or { }
+local Ext = SC.Ext or
 {
-  Base = base,
-  Ext = base .. "Extensions/"
+  Settings =
+  {
+    Enabled = true,
+    Visible = true
+  },
+
+  Paths =
+  {
+    Base = base,
+    Ext = base .. "Extensions/",
+    Save = SavePath .. "SC-E.txt"
+  }
 }
+SC.Ext = Ext
 
-function SC.Ext:ShouldShow()
-  return SC.Enabled and SC.Visible
-end
+dofile(SC.Ext.Paths.Ext .. "settings.lua")
+dofile(SC.Ext.Paths.Base .. "HudHitConfirm.lua")
 
-dofile(SC.Paths.Base .. "HudHitConfirm.lua")
+Ext.Settings:Load()

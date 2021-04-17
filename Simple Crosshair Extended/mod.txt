@@ -1,12 +1,25 @@
 {
-  "name" : "Simple Crosshair Extended",
-  "description" : "Adds a simple, toggleable crosshair which disables when taking aim, and even offsets itself when you use a bow",
-  "author" : "hugojmaia, extensions by ijre",
-  "hooks" : [
-    { "hook_id" : "lib/managers/hudmanager", "script_path" : "SimpleCrosshair.lua" },
-    { "hook_id" : "lib/managers/menumanager", "script_path" : "SimpleCrosshair.lua" },
-    { "hook_id" : "lib/managers/hud/hudhitconfirm", "script_path" : "SimpleCrosshair.lua" },
-    { "hook_id" : "lib/units/cameras/fpcameraplayerbase", "script_path" : "Extensions/zoom.lua" }
+  "name": "Simple Crosshair Extended",
+  "description": "Adds a simple, toggleable crosshair which disables when taking aim, and even offsets itself when you use a bow",
+  "author": "hugojmaia, extensions by ijre",
+  "hooks":
+  [
+    {
+      "hook_id": "lib/managers/hudmanager",
+      "script_path": "SimpleCrosshair.lua"
+    },
+    {
+      "hook_id": "lib/managers/menumanager",
+      "script_path": "SimpleCrosshair.lua"
+    },
+    {
+      "hook_id": "lib/managers/hud/hudhitconfirm",
+      "script_path": "SimpleCrosshair.lua"
+    },
+    {
+      "hook_id": "lib/units/cameras/fpcameraplayerbase",
+      "script_path": "Extensions/zoom.lua"
+    }
   ],
   "keybinds":
   [

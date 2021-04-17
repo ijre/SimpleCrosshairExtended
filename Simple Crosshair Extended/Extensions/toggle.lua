@@ -1,2 +1,4 @@
-SC.Enabled = not SC.Enabled
-SC.NeedRefresh = true
+SC.Ext.Settings.Enabled = not SC.Ext.Settings.Enabled
+SC.Ext.NeedRefresh = true
+
+SC.Ext.Settings:Save()

@@ -1,4 +1,3 @@
-
 name: Create PAYDAY mod release
 on:
   push:
@@ -6,7 +5,7 @@ on:
   pull_request:
     branches: [ master ]
 jobs:
-  build:
+  delete:
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@master
@@ -14,9 +13,20 @@ jobs:
       uses: ame-yu/action-delete-latest-release@v2
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
+    - name: Delete Existing Tag
+      uses: nbelingheri/delete-tag@v0.3.0
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: SC-E
+  create:
+    runs-on: windows-latest
+    needs: delete
+    steps:
+    - uses: actions/checkout@master
     - name: Archive Mod
       run: |
-         .\.github\7za.exe -tzip a ".\SC-E.zip" ".\Simple Crosshair Extended"
+        .\.github\7za.exe -tzip a ".\SC-E.zip" ".\Simple Crosshair Extended"
       shell: powershell
     - name: Create New Release
       id: create_release
@@ -43,7 +53,7 @@ jobs:
     - name: Hash mod and create mod meta file
       id: create_meta_file
       run: |
-         $(cat .\.github\meta.json).Replace("%HASH%", $(./.github/hash.exe "./Simple Crosshair Extended").Substring(17)) > ./meta.json
+        $(cat .\.github\meta.json).Replace("%HASH%", $(./.github/hash.exe "./Simple Crosshair Extended").Substring(17)) > ./meta.json
     - name: Upload meta file to Release
       id: upload-meta-asset
       uses: actions/upload-release-asset@v1

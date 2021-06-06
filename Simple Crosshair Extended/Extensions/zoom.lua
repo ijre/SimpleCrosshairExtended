@@ -11,8 +11,13 @@ function FPCameraPlayerBase:_update_stance(time, deltaTime)
     HUDHitConfirm.Ext.HideOnFinished = nil
   end
 
-  local state = managers.player:current_state()
-  if state and state == "bipod" then
+  -- local state = managers.player:current_state()
+  -- if state and state == "bipod" then
+  --   Show()
+  --   return
+  -- end
+
+  if managers.player:is_current_weapon_of_category("bow") or managers.player:is_current_weapon_of_category("lmg") then
     Show()
     return
   end

@@ -28,7 +28,7 @@
       "identifier":  "SC-E",
       "host":
       {
-        "meta": "https://github.com/ijre/SimpleCrosshair-Extended/releases/download/SC-E/meta.json"
+        "meta": "https://github.com/ijre/SimpleCrosshairExtended/releases/download/SC-E/meta.json"
       }
     }
   ]

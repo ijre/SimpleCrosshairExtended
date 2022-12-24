@@ -26,7 +26,7 @@ jobs:
     - uses: actions/checkout@master
     - name: Archive Mod
       run: |
-        .\.github\7za.exe -tzip a ".\SC-E.zip" ".\Simple Crosshair Extended"
+        .\.github\7za.exe -tzip a ".\SC-E.zip" ".\Extensions\" ".\mod.txt" ".\SimpleCrosshair.lua" ".\HudHitConfirm.lua"
       shell: powershell
     - name: Create New Release
       id: create_release

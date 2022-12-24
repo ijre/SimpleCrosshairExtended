@@ -1,5 +1,4 @@
 local base = ModPath
--- local base = ModPath .. "Simple Crosshair Extended/"
 
 SC = SC or { }
 local Ext = SC.Ext or

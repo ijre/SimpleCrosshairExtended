@@ -1,35 +1,26 @@
 local Ext = SC.Ext or { }
-local origUpdateStance = FPCameraPlayerBase._update_stance
 
-function FPCameraPlayerBase:_update_stance(time, deltaTime)
-  origUpdateStance(self, time, deltaTime)
+local function SetVisible(state)
+  Ext.Settings.Visible = state
+  HUDHitConfirm.Ext:ForceRefresh()
+end
 
-  local function Show()
-    Ext.Settings.Visible = not HUDHitConfirm.Ext.HideOnFinished
-    HUDHitConfirm.Ext:ForceRefresh()
-
-    HUDHitConfirm.Ext.HideOnFinished = nil
+local origCheckSight = PlayerStandard._check_action_steelsight
+function PlayerStandard:_check_action_steelsight(time, input)
+  local newAct = origCheckSight(self, time, input)
+  if not Ext.Settings.Enabled then
+    return newAct
   end
 
-  -- local state = managers.player:current_state()
-  -- if state and state == "bipod" then
-  if managers.player:is_current_weapon_of_category("bow") or managers.player:is_current_weapon_of_category("lmg") then
-    Show()
-    return
+  if managers.player:is_current_weapon_of_category("bow")
+     or managers.player:is_current_weapon_of_category("lmg")
+     or managers.player:is_current_weapon_of_category("akimbo") then
+    SetVisible(true)
+    return newAct
   end
 
-  local fovData = self._fov
-  local transData = fovData.transition
-
-  if transData then
-    if fovData.fov > transData.end_fov then
-      HUDHitConfirm.Ext.HideOnFinished = true
-    elseif fovData.fov < transData.end_fov then
-      Show()
-    end
-  elseif HUDHitConfirm.Ext.HideOnFinished ~= nil then
-    Show()
-  end
+  SetVisible(not self._state_data.in_steelsight)
+  return newAct
 end
 
 SC.Ext = Ext

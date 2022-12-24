@@ -9,7 +9,7 @@
       "script_path": "SimpleCrosshair.lua"
     },
     {
-      "hook_id": "lib/units/cameras/fpcameraplayerbase",
+      "hook_id": "lib/units/beings/player/states/playerstandard",
       "script_path": "Extensions/zoom.lua"
     }
   ],
